@@ -1,0 +1,14 @@
+name: test pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: command-1
+        run: echo "Hello World!"
