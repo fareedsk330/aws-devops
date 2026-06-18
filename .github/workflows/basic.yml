@@ -3,7 +3,7 @@ name: Multi Stage Pipeline
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
