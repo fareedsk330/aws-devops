@@ -1,5 +1,6 @@
 name: Multi Stage Pipeline
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["test pipeline"]
     types:
