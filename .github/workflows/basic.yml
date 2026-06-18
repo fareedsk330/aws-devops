@@ -1,9 +1,9 @@
 name: Multi Stage Pipeline
 on:
-  push:
-    branches:
-      - develop
-
+  workflow_run:
+    workflows: ["test pipeline"]
+    types:
+      - completed
 permissions:
   id-token: write
   contents: read
