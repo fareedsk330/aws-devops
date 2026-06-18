@@ -1,25 +1,51 @@
-name: Basic Pipeline
+name: Multi Stage Pipeline
 
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
-  hello-world:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Print Message
-        run: echo "Hello from GitHub Actions"
+      - name: Build
+        run: |
+          echo "Building application..."
+          mkdir build
+          echo "app" > build/app.txt
 
-      - name: Display Date
-        run: date
-  hello-jaan:
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: build/
+
+  test:
     runs-on: ubuntu-latest
+    needs: build
+
     steps:
-      - name: check user
-        run: whoami
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+          path: build/
+
+      - name: Test
+        run: |
+          echo "Running tests..."
+          cat build/app.txt
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Deploy
+        run: |
+          echo "Deploying application..."
