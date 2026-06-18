@@ -18,3 +18,8 @@ jobs:
 
       - name: Display Date
         run: date
+  hello-jaan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check user
+        run: whoami
