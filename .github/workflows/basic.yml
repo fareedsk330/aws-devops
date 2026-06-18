@@ -1,0 +1,20 @@
+name: Basic Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print Message
+        run: echo "Hello from GitHub Actions"
+
+      - name: Display Date
+        run: date
